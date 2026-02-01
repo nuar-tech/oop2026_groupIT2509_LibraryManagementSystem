@@ -1,6 +1,6 @@
 package entity;
 
-public class Book {
+public abstract class Book {
     private int id;
     private String isbn;
     private String title;
@@ -8,7 +8,10 @@ public class Book {
     private int yearPublished;
     private boolean available;
 
-    // Constructors
+    public enum BookType {
+        PRINTED, EBOOK, REFERENCE
+    }
+
     public Book() {}
 
     public Book(String isbn, String title, String author, int yearPublished) {
@@ -19,7 +22,8 @@ public class Book {
         this.available = true;
     }
 
-    // Getters and Setters
+    public abstract BookType getBookType();
+
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

@@ -1,5 +1,4 @@
 package exception;
-
 public class BookAlreadyOnLoanException extends LibraryException {
     public BookAlreadyOnLoanException(String message) {
         super(message);

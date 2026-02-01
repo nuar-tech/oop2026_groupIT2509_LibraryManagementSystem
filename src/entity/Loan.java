@@ -11,7 +11,6 @@ public class Loan {
     private LocalDate returnDate;
     private double fineAmount;
 
-    // Constructors
     public Loan() {}
 
     public Loan(int bookId, int memberId, LocalDate dueDate) {
@@ -22,7 +21,6 @@ public class Loan {
         this.fineAmount = 0.0;
     }
 
-    // Getters and Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

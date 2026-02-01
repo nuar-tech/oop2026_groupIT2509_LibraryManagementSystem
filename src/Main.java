@@ -9,7 +9,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("\n=== Library Management System ===");
             System.out.println("1. Borrow a book");
             System.out.println("2. Return a book");
             System.out.println("3. View current loans for a member");
@@ -18,7 +17,7 @@ public class Main {
             System.out.print("Choose option: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -44,6 +43,7 @@ public class Main {
                     int memId = scanner.nextInt();
                     System.out.println(controller.viewCurrentLoans(memId));
                     break;
+
 
                 case 4:
                     System.out.println(controller.listAvailableBooks());

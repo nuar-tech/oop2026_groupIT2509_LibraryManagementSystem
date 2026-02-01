@@ -1,5 +1,4 @@
 package exception;
-
 public class LoanOverdueException extends LibraryException {
     private final double fineAmount;
 

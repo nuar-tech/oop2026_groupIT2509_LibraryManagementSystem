@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberRepository {
-
     public Member findById(int id) throws SQLException, MemberNotFoundException {
         String sql = "SELECT * FROM members WHERE id = ?";
 

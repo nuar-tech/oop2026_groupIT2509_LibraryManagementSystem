@@ -10,7 +10,6 @@ public class Member {
     private String phone;
     private LocalDate joinDate;
 
-    // Constructors
     public Member() {}
 
     public Member(String memberId, String name, String email, String phone) {
@@ -21,7 +20,6 @@ public class Member {
         this.joinDate = LocalDate.now();
     }
 
-    // Getters and Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookRepository {
-
     public Book findById(int id) throws SQLException {
         String sql = "SELECT * FROM books WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();

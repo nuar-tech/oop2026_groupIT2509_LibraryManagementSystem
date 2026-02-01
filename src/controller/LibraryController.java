@@ -22,7 +22,6 @@ public class LibraryController {
         this.loanService = new LoanService();
     }
 
-    // User Story: Borrow a book
     public String borrowBook(int bookId, int memberId, LocalDate dueDate) {
         try {
             Loan loan = loanService.borrowBook(bookId, memberId, dueDate);
@@ -36,7 +35,6 @@ public class LibraryController {
         }
     }
 
-    // User Story: Return a book
     public String returnBook(int loanId) {
         try {
             double fine = loanService.returnBook(loanId);
@@ -49,7 +47,6 @@ public class LibraryController {
         }
     }
 
-    // User Story: View current loans per member
     public String viewCurrentLoans(int memberId) {
         try {
             List<Loan> loans = loanService.getCurrentLoans(memberId);
@@ -68,7 +65,6 @@ public class LibraryController {
         }
     }
 
-    // User Story: List available books
     public String listAvailableBooks() {
         try {
             List<Book> books = bookRepository.findAvailableBooks();
