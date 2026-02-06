@@ -1,5 +1,4 @@
 package entity;
-
 public class PrintedBook extends Book {
     private int pages;
 

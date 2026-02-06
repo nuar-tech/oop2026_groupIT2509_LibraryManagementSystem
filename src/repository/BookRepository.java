@@ -10,10 +10,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class BookRepository implements CrudRepository<Book, Integer> {
 
-    // Implement CrudRepository methods
     @Override
     public Optional<Book> findById(Integer id) throws SQLException {
         String sql = "SELECT * FROM books WHERE id = ?";
@@ -30,6 +31,7 @@ public class BookRepository implements CrudRepository<Book, Integer> {
         }
         return Optional.empty();
     }
+
     @Override
     public List<Book> findAll() throws SQLException {
         List<Book> books = new ArrayList<>();
@@ -97,7 +99,6 @@ public class BookRepository implements CrudRepository<Book, Integer> {
         return 0;
     }
 
-    // Keep existing methods from Milestone 1
     public List<Book> findAvailableBooks() throws SQLException {
         List<Book> books = new ArrayList<>();
         String sql = "SELECT * FROM books WHERE available = true";
@@ -124,7 +125,27 @@ public class BookRepository implements CrudRepository<Book, Integer> {
             pstmt.executeUpdate();
         }
     }
-    // Updated mapToBook method to handle book types
+
+    public List<Book> findBooksBy(Predicate<Book> condition) throws SQLException {
+        return findAll().stream()
+                .filter(condition)
+                .collect(Collectors.toList());
+    }
+
+    public List<Book> findByAuthor(String authorName) throws SQLException {
+        return findBooksBy(book ->
+                book.getAuthor().toLowerCase().contains(authorName.toLowerCase())
+        );
+    }
+
+    public List<Book> getBooksSortedByTitle() throws SQLException {
+        List<Book> books = findAll();
+        books.sort((book1, book2) ->
+                book1.getTitle().compareToIgnoreCase(book2.getTitle())
+        );
+        return books;
+    }
+
     private Book mapToBook(ResultSet rs) throws SQLException {
         String bookTypeStr = rs.getString("book_type");
         Book.BookType bookType;
@@ -132,10 +153,9 @@ public class BookRepository implements CrudRepository<Book, Integer> {
         try {
             bookType = Book.BookType.valueOf(bookTypeStr.toUpperCase());
         } catch (IllegalArgumentException e) {
-            bookType = Book.BookType.PRINTED; // Default
+            bookType = Book.BookType.PRINTED;
         }
 
-        // Create appropriate book type using factory
         Book book = BookFactory.createBook(bookType);
         book.setId(rs.getInt("id"));
         book.setIsbn(rs.getString("isbn"));
@@ -143,19 +163,6 @@ public class BookRepository implements CrudRepository<Book, Integer> {
         book.setAuthor(rs.getString("author"));
         book.setYearPublished(rs.getInt("year_published"));
         book.setAvailable(rs.getBoolean("available"));
-
-        // Set specific properties
-        if (book instanceof PrintedBook) {
-            int pages = rs.getInt("pages");
-            if (!rs.wasNull()) {
-                ((PrintedBook) book).setPages(pages);
-            }
-        } else if (book instanceof Ebook) {
-            double fileSize = rs.getDouble("file_size_mb");
-            if (!rs.wasNull()) {
-                ((Ebook) book).setFileSizeMB(fileSize);
-            }
-        }
 
         return book;
     }

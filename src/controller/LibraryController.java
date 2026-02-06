@@ -18,7 +18,6 @@ public class LibraryController {
     private final BookRepository bookRepository;
     private final MemberRepository memberRepository;
     private final LoanService loanService;
-
     public LibraryController() {
         this.bookRepository = new BookRepository();
         this.memberRepository = new MemberRepository();

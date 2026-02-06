@@ -21,7 +21,6 @@ public class LoanReport {
         this.fine = builder.fine;
     }
 
-    // Getters
     public int getLoanId() { return loanId; }
     public String getBookTitle() { return bookTitle; }
     public String getMemberName() { return memberName; }
@@ -29,7 +28,6 @@ public class LoanReport {
     public LocalDate getDueDate() { return dueDate; }
     public double getFine() { return fine; }
 
-    // Builder
     public static class Builder {
         private int loanId;
         private String bookTitle;
@@ -85,6 +83,7 @@ public class LoanReport {
 
     public String generateReport() {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LoanReport report = new LoanReport.Builder().loanId(1001).bookTitle("Effective java").memberName("Alice").build();
         return String.format(
                 "Loan Report #%d\n" +
                         "Book: %s\n" +
@@ -92,7 +91,7 @@ public class LoanReport {
                         "Loaned: %s\n" +
                         "Due: %s\n" +
                         "Fine: $%.2f\n",
-                loanId, bookTitle, memberName,
+                report.loanId, report.bookTitle, report.memberName,
                 loanDate.format(fmt), dueDate.format(fmt), fine
         );
     }

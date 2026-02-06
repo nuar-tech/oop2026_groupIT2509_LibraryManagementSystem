@@ -44,7 +44,6 @@ public class FinePolicy {
             graceDays = 3;
         }
     }
-
     public double getDailyRate() { return dailyRate; }
     public double getMaxFine() { return maxFine; }
     public int getGraceDays() { return graceDays; }

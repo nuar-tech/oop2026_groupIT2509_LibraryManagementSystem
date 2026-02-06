@@ -56,7 +56,7 @@ public class Main {
             System.out.println("\n=== BOOK OPERATIONS ===");
             System.out.println("1. List all books");
             System.out.println("2. List available books");
-            System.out.println("3. Add new book (Factory Pattern Demo)");
+            System.out.println("3. Add new book (Factory Pattern)");
             System.out.println("4. Search book by ID");
             System.out.println("0. Back to Main Menu");
             System.out.print("Choose option: ");
@@ -145,7 +145,6 @@ public class Main {
 
     private static void systemInformation() {
         System.out.println("\n=== SYSTEM INFORMATION ===");
-        System.out.println("Library Management System - Milestone 2");
         System.out.println("OOP Features Implemented:");
         System.out.println("1. Singleton Pattern: FinePolicy");
         System.out.println("2. Factory Pattern: BookFactory for PrintedBook, Ebook, ReferenceBook");

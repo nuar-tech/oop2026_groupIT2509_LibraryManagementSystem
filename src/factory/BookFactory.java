@@ -1,7 +1,6 @@
 package factory;
 
 import entity.*;
-
 public class BookFactory {
 
     public static Book createBook(Book.BookType type) {
@@ -13,7 +12,7 @@ public class BookFactory {
             case REFERENCE:
                 return new ReferenceBook();
             default:
-                return new PrintedBook(); // Default fallback
+                return new PrintedBook();
         }
     }
 

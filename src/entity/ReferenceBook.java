@@ -1,5 +1,4 @@
 package entity;
-
 public class ReferenceBook extends Book {
     private String location;
 

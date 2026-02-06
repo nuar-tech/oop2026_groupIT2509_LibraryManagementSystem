@@ -3,7 +3,6 @@ package service;
 import edu.aitu.oop3.db.DatabaseConnection;
 import entity.Loan;
 import entity.Book;
-import entity.Member;
 import repository.BookRepository;
 import repository.MemberRepository;
 import exception.*;
@@ -11,6 +10,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class LoanService {
     private final BookRepository bookRepository;
@@ -26,11 +26,11 @@ public class LoanService {
     public Loan borrowBook(int bookId, int memberId, LocalDate dueDate)
             throws LibraryException, SQLException {
 
-        Book book = bookRepository.findById(bookId);
-        if (book == null) {
+        Optional<Book> book = bookRepository.findById(bookId);
+        if (book.isEmpty()) {
             throw new LibraryException("Book not found");
         }
-        if (!book.isAvailable()) {
+        if (!book.get().isAvailable()) {
             throw new BookAlreadyOnLoanException(bookId);
         }
 
